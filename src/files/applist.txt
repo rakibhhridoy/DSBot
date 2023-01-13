@@ -1,0 +1,5 @@
+atom
+code
+jupyter-notebook
+pycharm
+firefox

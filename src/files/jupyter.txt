@@ -1,0 +1,3 @@
+jupyter notebook
+jupyter lab
+anaconda navigator
