@@ -1,6 +1,7 @@
 import pyaudio
 from vosk import Model, KaldiRecognizer
 from collections import OrderedDict
+from createf import creating, deleting
 
 model_file = r"/home/RHHLab/voskModels/vosk-model-en-us-0.22"
 model_file_s = r"/home/RHHLab/voskModels/vosk-model-small-en-us-0.15"
@@ -9,6 +10,12 @@ channels = 1
 rate = 16000
 framesPerBuffer = 8192
 
+
+
+directory = ["folder", "directory"]
+file = "file"
+deletion = ["delete", "remove", "exclude"]
+creation = ["create", "add", "include"]
 
 
 def listening():
@@ -24,23 +31,25 @@ def listening():
         data = stream.read(4096)
         if recognizer.AcceptWaveform(data):
             text = recognizer.Result()
-            strip_duplicates(text[14:-3])
+            text = strip_the(text[14:-3])
+            print(text)
+            audiolist = text.split(" ")
+            folderorfile = audiolist.pop()
+        
+            if bool(set(audiolist).intersection(creation)):
+                creating(audiolist, folderorfile, directory,file)
+            if bool(set(audiolist).intersection(deletion)):
+                deleting(audiolist, folderorfile, directory, file)
             
-            
-def strip_duplicates(text):
-    
-#    text = OrderedDict().fromkeys(text.split())
-#    text = ' '.join(text)
-
+def strip_the(text):
     if text.startswith("the") or text.endswith("the"):
         if text.startswith("the"):
             text = text.removeprefix("the")
         else:
             text = text.removesuffix("the")
-    
         
-    print(text)
+    return text
     
-        
+
     
 listening()
