@@ -1,4 +1,18 @@
 import os
+#from DSBot import Bot
+
+
+def appList(file):
+    with open(file) as f:
+        name_list = [line.rstrip() for line in f]
+    print(name_list)
+        
+
+
+def match(str1, str2):
+    pass
+
+appList("files/applist.txt")
 
 def jupyter():
     if "notebook" in value:
