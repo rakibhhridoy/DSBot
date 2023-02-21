@@ -2,6 +2,7 @@ import pyaudio
 from vosk import Model, KaldiRecognizer
 from collections import OrderedDict
 from createf import creating, deleting
+from apps import Command
 
 model_file = r"/home/RHHLab/voskModels/vosk-model-en-us-0.22"
 model_file_s = r"/home/RHHLab/voskModels/vosk-model-small-en-us-0.15"
@@ -48,6 +49,8 @@ class Bot:
                 if bool(set(self._audiolist).intersection(self._deletion)):
                     deleting(self._audiolist, folderorfile, self._directory, self._file)
                 
+                Command.apps_open()
+                
     def strip_the(self, text):
         if text.startswith("the") or text.endswith("the"):
             if text.startswith("the"):
@@ -55,8 +58,10 @@ class Bot:
             else:
                 text = text.removesuffix("the")
         return text
-        
+    
+
 
 bot = Bot(model_file_lg)
 bot.listening()
+
     

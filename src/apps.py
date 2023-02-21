@@ -1,34 +1,39 @@
 import os
-#from DSBot import Bot
+from DSBot import Bot
 
 
-def appList(file):
-    with open(file) as f:
-        name_list = [line.rstrip() for line in f]
-    print(name_list)
+class Command(Bot):
+    def __init__(self):
+        self._applist = self.appList("files/applist.txt")
+
+    def appList(self, file):
+        with open(file) as f:
+            name_list = [line.rstrip() for line in f]
+        return name_list
         
 
+    def match(self, str1, str2):
+        pass
 
-def match(str1, str2):
-    pass
+    def apps_open(self):
+        def jupyter(self):
+            if "notebook" in self._voice:
+                os.system("jupyter-notebook")
+            
+            elif "lab" in self._voice:
+                os.system("jupyter-lab")
 
-appList("files/applist.txt")
+        def anaconda(self):
+            if "anaconda" in self._voice:
+                os.system("anaconda-navigator")
+            elif "spyder" in self._voice:
+                os.system("spyder")
 
-def jupyter():
-    if "notebook" in value:
-        os.system("jupyter-notebook")
-    
-    elif "lab" in value:
-        os.system("jupyter-lab")
-
-def anaconda():
-    if "anaconda" in value:
-        os.system("anaconda-navigator")
-    elif "spyder" in value:
-        os.system("spyder")
-
-def youtube():
-    if len(value) < 14:
-        os.system("/opt/brave.com/brave/brave-browser --profile-directory=Default --app-id=agimnkijcaahngcdmfeangaknmldooml")
-    
+        def youtube(self):
+            if "youtube" in self._voice:
+                os.system("/opt/brave.com/brave/brave-browser --profile-directory=Default --app-id=agimnkijcaahngcdmfeangaknmldooml")
+        
+        jupyter()
+        anaconda()
+        youtube()
 
